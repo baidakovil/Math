@@ -1,0 +1,710 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\pagenumbering{gobble}
+\usepackage{multicol}
+\newcommand{\ssolve}{\par\vspace{5pt}\noindent{\bf Решение. }\par}
+\newcommand{\aanswer}{\par\vspace{5pt}\noindent{\bf Ответ. }}
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+\newcommand{\bvm}{\begin{vmatrix}}
+\newcommand{\evm}{\end{vmatrix}}
+\newcommand{\bal}{\left\{\begin{aligned}}
+\newcommand{\eal}{\end{aligned}\right.}
+\newcommand{\llaq}{\quad \longrightarrow \quad}
+\newcommand{\ao}[1]{\overset{#1}{\longmapsto}}
+
+\begin{document}
+
+\title{<<Линейная алгебра:\\ Линейные отображения>>\\ \vspace{12pt} Домашнее задание №4}
+\author{Байдаков Илья}
+\date{\today}
+\maketitle
+
+\section*{Задание 1}
+Найдите размерность и предъявите базис следующего подпространства в $\mathbb{R}^5$, заданного множеством решений следующей однородной системы линейных уравнений:
+
+\[
+\left\{
+\begin{aligned}
+& 2x_1 - x_2 + x_3 - 2x_4 + 4x_5 = 0\\
+& 4x_1 - 2x_2 + 5x_3 + x_4 + 7x_5 = 0\\
+& 2x_1 - x_2 + x_3 + 8x_4 + 2x_5 = 0
+\end{aligned}
+\right.
+\]
+\vspace{5pt}
+\ssolve
+Составим матрицу коэффициентов системы и приведём её к каноническому виду: \par
+$$
+A=
+\begin{pmatrix}
+2&-1&1&-2&4\\
+4&-2&5&1&7\\
+2&-1&1&8&2\\
+\end{pmatrix}
+\overset{III-I}{\longmapsto}
+\begin{pmatrix}
+2&-1&1&-2&4\\
+4&-2&5&1&7\\
+0&0&0&10&-2\\
+\end{pmatrix}
+\longmapsto
+$$
+
+$$
+\overset{II-I \cdot 2}{\longmapsto}
+\begin{pmatrix}
+2&-1&1&-2&4\\
+0&0&3&5&-1\\
+0&0&0&10&-2\\
+\end{pmatrix}
+\overset{III \cdot \frac{1}{2}}{\longmapsto}
+\begin{pmatrix}
+2&-1&1&-2&4\\
+0&0&3&5&-1\\
+0&0&0&5&-1\\
+\end{pmatrix}
+$$ 
+
+$$
+\overset{I + II \cdot 4}{\longmapsto}
+\begin{pmatrix}
+2&-1&13&18&0\\
+0&0&3&5&-1\\
+0&0&0&5&-1\\
+\end{pmatrix}
+\overset{II-III}{\longmapsto}
+\begin{pmatrix}
+2&-1&13&18&0\\
+0&0&1&0&0\\
+0&0&0&5&-1\\
+\end{pmatrix}
+\longmapsto
+$$
+
+$$
+\overset{I - III \cdot \frac{18}{5}}{\longmapsto}
+\begin{pmatrix}
+2&-1&13&18&0\\
+0&0&1&0&0\\
+0&0&0&5&-1\\
+\end{pmatrix}
+\overset{I+ III \cdot \frac{1}{2}}{\longmapsto}
+\begin{pmatrix}
+2&-1&13&0&\frac{18}{5}\\
+0&0&1&0&0\\
+0&0&0&5&-1\\
+\end{pmatrix}
+\longmapsto
+$$
+
+$$
+\overset{I - II \cdot 13}{\longmapsto}
+\begin{pmatrix}
+2&-1&0&0&\frac{18}{5}\\
+0&0&1&0&0\\
+0&0&0&5&-1\\
+\end{pmatrix}
+$$
+
+\par
+Теперь видно, что размерность подпространства $V$, заданного множеством решений нашей однородной системы, равна количеству свободных переменных. У нас это $x_2$ и $x_5$:
+$$\dim V = 2.$$ \par
+Чтобы найти базис подпространства, будем попеременно задавать свободным переменным значения 1, остальных приравнивая к нулю.
+$$
+\left\{
+\begin{aligned}
+x_2=1 \\
+x_5 = 0 \\
+\end{aligned} 
+\right.
+\quad \longrightarrow \quad
+v_2 = 
+\begin{pmatrix}
+\frac{1}{2} \\
+1 \\
+0 \\
+0 \\
+0 \\
+\end{pmatrix}
+$$
+
+$$
+\left\{
+\begin{aligned}
+x_2=0 \\
+x_5 = 1 \\
+\end{aligned} 
+\right.
+\quad \longrightarrow \quad
+v_5 = 
+\begin{pmatrix}
+-\frac{9}{5} \\
+0 \\
+0 \\
+- \frac{1}{5} \\
+1 \\
+\end{pmatrix}
+$$
+\aanswer
+Размерность подпространства $\dim V = 2$, базис подпространства составлен векторами $v_2$ и $v_5$.
+
+
+\section*{Задание 2}
+
+Пусть $\varphi:\mathbb{R}^2\rightarrow \mathbb{R}^3$ --- линейное отображение, причём 
+$$\varphi\begin{pmatrix}
+{2}\\{1}
+\end{pmatrix}=
+\begin{pmatrix}
+{2}\\{3}\\{2}
+\end{pmatrix}, \
+\varphi \begin{pmatrix}
+{3}\\{0}
+\end{pmatrix}=
+\begin{pmatrix}
+{1}\\{6}\\{9}
+\end{pmatrix}.$$
+Найдите $\varphi \begin{pmatrix}
+-4 \\ 3
+\end{pmatrix}$. \par
+\vspace{8pt} 
+
+\ssolve
+Найдём матрицу линейного отображения $A$. Матрицы прообразов $V$ и образов $W$ записываются так:
+$$
+V=
+\begin{pmatrix}
+2&3\\
+1&0\\
+\end{pmatrix},
+W=
+\begin{pmatrix}
+2&1\\
+3&6\\
+2&9\\
+\end{pmatrix}
+$$
+Тогда матрица $A$ находится из выражения:
+$$
+A=WV^{-1}=
+\begin{pmatrix}
+2&1\\
+3&6\\
+2&9\\
+\end{pmatrix}
+\begin{pmatrix}
+2&3\\
+1&0\\
+\end{pmatrix}^{-1}
+=
+\begin{pmatrix}
+2&1\\
+3&6\\
+2&9\\
+\end{pmatrix}
+\begin{pmatrix}
+0&1\\
+\frac{1}{3}&-\frac{2}{3}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{1}{3}&1\frac{1}{3}\\
+2&-1\\
+3&-4\\
+\end{pmatrix}
+$$
+Теперь подействуем матрицей $A$ на заданный вектор-прообраз из $V$:
+$$\varphi \begin{pmatrix}
+-4 \\ 3
+\end{pmatrix}
+=
+A \cdot
+\begin{pmatrix}
+-4 \\ 3
+\end{pmatrix} =
+\begin{pmatrix}
+2\frac{2}{3} \\ -11 \\ -24
+\end{pmatrix}
+$$
+\aanswer
+$\varphi 
+\left( \begin{smallmatrix}
+-4 \\ 3
+\end{smallmatrix} \right)
+=
+\left( \begin{smallmatrix}
+2\frac{2}{3} \\ -11 \\ -24
+\end{smallmatrix} \right)
+$.
+
+
+\section*{Задание 3}
+
+Пусть $V=\mathbb{R}[x]_{\leqslant 2}$ -- пространство многочленов степени не более 2. 
+Линейный оператор $\varphi\colon V\rightarrow V$ в базисе $e = \{1,x,x^2\}$ задаётся матрицей
+$$
+A = A(\varphi, e) = \begin{pmatrix}
+-1&3&2\\
+-1&2&4\\
+0&-1&2
+\end{pmatrix}.
+$$
+
+а) Найдите $\varphi(x^2)$ и $\varphi(-2x^2 - 4x - 1)$.
+
+\vspace{3pt}
+
+б) Существует ли прообраз у многочлена $7x^2 + 2x - 5$? Иными словами, существует ли многочлен $g(x) \in V$ такой, что $$\varphi(g) = 7x^2 + 2x - 5?$$
+
+\ssolve
+а) В базисе $e = \{1,x,x^2\}$ многочлен $x^2$ соответствует вектору 
+$$v_1=
+\begin{pmatrix}
+0 \\ 0 \\ 1
+\end{pmatrix}
+,$$
+а значит, 		
+$$\varphi(x^2)=A(\varphi, e)\cdot v_1 =
+\begin{pmatrix}
+-1&3&2\\
+-1&2&4\\
+0&-1&2
+\end{pmatrix}
+\begin{pmatrix}
+0 \\ 0 \\ 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 \\ 4 \\ 2
+\end{pmatrix}
+.$$ \par
+Получаем, что искомый многочлен имеет вид:
+$$w_1 = 2x^2+4x+2.$$
+
+Аналогично, многочлен $-2x^2 - 4x - 1$ соответствует вектору 
+$$v_2=
+\begin{pmatrix}
+-1 \\ -4 \\ -2
+\end{pmatrix}
+,$$
+а значит, 		
+$$\varphi(-2x^2 - 4x - 1)=A \cdot v_2 =
+\begin{pmatrix}
+-1&3&2\\
+-1&2&4\\
+0&-1&2
+\end{pmatrix}
+\begin{pmatrix}
+-1 \\ -4 \\ -2
+\end{pmatrix}
+=
+\begin{pmatrix}
+-15 \\ -15 \\ 0
+\end{pmatrix}.
+$$ \par
+Получаем, что искомый многочлен имеет вид:
+$$w_2 = -15x-15.$$
+\vspace{1pt} \par
+б) Если прообраз $g$ у многочлена $w = 7x^2 + 2x - 5$ существует, то должно выполняться равенство:
+$$A \cdot g = w 
+\quad \longrightarrow \quad
+A 
+\begin{pmatrix}
+g_1 \\ g_2 \\ g_3
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+-5 \\ 2 \\ 7
+\end{pmatrix}.$$
+Получили систему линейных уравнений. Если решение удастся получить методом Гаусса, то $g(x)$ существует. Запишем расширенную матрицу системы и приведём её к каноническому виду:
+$$ \left(\begin{array}{ccc|c}
+-1&3&2&-5\\
+-1&2&4&2\\
+0&-1&2&7
+\end{array} \right)
+\longmapsto
+\left(\begin{array}{ccc|c}
+1&0&-8&-16\\
+0&1&-2&-7\\
+0&0&0&0
+\end{array} \right).
+$$
+Принимая $g_1$, $g_2$ главными переменными, а $g_3$ --- зависимой, получаем решение:
+$$
+\left\{
+\begin{aligned}
+&g_1 = 8g_3-16\\
+&g_2 = 2g_3-7 \\
+&g_3 \in \mathbb{R}
+\end{aligned}
+\right.
+\qquad \longrightarrow \qquad
+g =
+\begin{pmatrix}
+8g_3-16 \\ 2g_3-7 \\ g_3
+\end{pmatrix}, 
+g_3 \in \mathbb{R}
+$$ 
+Вектор $g$ найден. Значит, прообраз существует.
+\aanswer
+а) $w_1 = 2x^2+4x+2, w_2 = -15x-15$. б) Существует.
+
+\section*{Задание 4}
+В пространстве $\mathbb R^3$ заданы следующие векторы:
+\[
+v_1 =
+\begin{pmatrix}
+{1}\\{0}\\{2}
+\end{pmatrix}
+,\;
+v_2 =
+\begin{pmatrix}
+{1}\\{1}\\{-1}
+\end{pmatrix}
+,\;
+v_3 =
+\begin{pmatrix}
+{2}\\{0}\\{3}
+\end{pmatrix}
+,\;
+u_1 =
+\begin{pmatrix}
+{1}\\{0}\\{1}
+\end{pmatrix}
+,\;
+u_2 =
+\begin{pmatrix}
+{0}\\{1}\\{1}
+\end{pmatrix}
+,\;
+u_3 =
+\begin{pmatrix}
+{0}\\{0}\\{2}
+\end{pmatrix}.
+\]
+Найдите матрицу $A$ линейного оператора $\varphi\colon \mathbb R^3\to \mathbb R^3$, заданного по правилу $x\mapsto Ax$, такого, что $A v_i = u_i$ при $i = 1, 2, 3$. 
+\vspace{8pt}
+
+\ssolve
+Если матрица $A$ такого линейного оператора существует, должно выполняться равенство:
+$$A \cdot V = U 
+\quad \longrightarrow \quad
+A \cdot 
+\begin{pmatrix}
+1&1&2\\
+0&1&0\\
+2&-1&3
+\end{pmatrix}
+=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+1&1&2
+\end{pmatrix}
+$$ \par
+Это матричное уравнение можно решить домножением на $V^{-1}$ справа:
+$$A  = U \cdot V^{-1} = 
+U \cdot
+\begin{pmatrix}
+1&1&2\\
+0&1&0\\
+2&-1&3
+\end{pmatrix}^{-1}
+=$$
+
+$$=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+1&1&2
+\end{pmatrix}
+\begin{pmatrix}
+-3&5&2\\
+0&1&0\\
+2&-3&-1
+\end{pmatrix}
+=
+\begin{pmatrix}
+-3&5&2\\
+0&1&0\\
+1&0&0
+\end{pmatrix}
+$$ 
+\aanswer
+$A=\left(
+\begin{smallmatrix}
+-3&5&2\\
+0&1&0\\
+1&0&0
+\end{smallmatrix} \right).$
+\newpage
+\section*{Задание 5}
+В пространстве $\mathbb R^3$ заданы следующие векторы:
+\[
+v_1 = 
+\begin{pmatrix}
+{1}\\{1}\\{1}
+\end{pmatrix},\,
+v_2 = 
+\begin{pmatrix}
+{1}\\{2}\\{0}
+\end{pmatrix},\,
+v_3 = 
+\begin{pmatrix}
+{5}\\{8}\\{2}
+\end{pmatrix},\,
+v_4 = 
+\begin{pmatrix}
+{-1}\\{-2}\\{1}
+\end{pmatrix},\,
+v_5 = 
+\begin{pmatrix}
+{3}\\{5}\\{-1}
+\end{pmatrix}.
+\]
+Существует ли линейное отображение $\varphi\colon \mathbb R^3\to \mathbb R^2$ такое, что $\varphi(v_i) = u_i$ при $i = 1, 2, 3, 4, 5$, где
+
+\[
+u_1 = 
+\begin{pmatrix}
+{1}\\{0}
+\end{pmatrix},\,
+u_2 = 
+\begin{pmatrix}
+{0}\\{1}
+\end{pmatrix},\,
+u_3 = 
+\begin{pmatrix}
+{2}\\{3}
+\end{pmatrix},\,
+u_4 = 
+\begin{pmatrix}
+{0}\\{0}
+\end{pmatrix},\,
+u_5 = 
+\begin{pmatrix}
+{1}\\{0}
+\end{pmatrix}?
+\]
+
+\ssolve
+Рассмотрим те из векторов-прообразов $v_i$, которые составляют базис $\mathbb{R}^3$: $v_2$, $v_3$ и $v_4$, и соответствующие им векторы-образы:
+$$V=
+\bpm
+1&5&-1\\
+2&8&-2\\
+0&2&1
+\epm, 
+ U=
+\bpm
+0&2&0\\
+1&3&0\\
+\epm
+$$
+
+Если отображение $\varphi$ существует, то справедливо, что:
+$$A(\varphi)V=U 
+\quad \longrightarrow \quad
+A(\varphi)= UV^{-1}=$$
+$$
+\bpm
+0&2&0\\
+1&3&0\\
+\epm
+\bpm
+1&5&-1\\
+2&8&-2\\
+0&2&1
+\epm^{-1}
+=
+\bpm
+0&2&0\\
+1&3&0\\
+\epm
+\bpm
+-6&\frac{7}{2}&1\\
+1&-\frac{1}{2}&0\\
+-2&1&1
+\epm=
+\bpm
+2&-1&0\\
+-3&2&1\\
+\epm
+$$
+Составим матрицу $V^*$ из всех данных нам векторов-прообразов и проверим, правильно ли матрица отображения работает с ними:
+$$
+U^*=A(\varphi)V^*=
+\bpm
+2&-1&0\\
+-3&2&1\\
+\epm
+\bpm
+1&1&5&-1&3\\
+1&2&8&-2&5\\
+1&0&2&1&-1
+\epm
+=
+\bpm
+1&0&2&0&1\\
+0&1&3&0&0\\
+\epm
+$$
+Столбцы матрицы $U^*$ соответствуют векторам $u_i$, значит, отображение существует.
+\aanswer
+Отображение существует.
+\newpage
+
+\section*{Задание 6}
+Найти собственные значения и собственные векторы следующих матриц:
+
+$$
+\text{а)}  \begin{pmatrix}
+2 & 8\\
+3 & 4
+\end{pmatrix}, \quad
+\text{б)} \begin{pmatrix}
+{4}&{-5}&{2}\\
+{5}&{-7}&{3}\\
+{6}&{-9}&{4}\\
+\end{pmatrix}.
+$$
+Укажите базис собственных подпространств $V_\lambda$ для каждого собственного значения $\lambda$.
+
+\ssolve
+а) Составим характеристический многочлен $\chi_A(\lambda)$:
+$$\chi_A(\lambda)=
+\det(\lambda E - A)=
+\bvm
+\lambda - 2 & -8 \\
+-3 & \lambda - 4
+\evm
+=$$
+$$
+=(\lambda - 4)(\lambda -2)-24= 
+\lambda^2-6\lambda-16 
+\llaq
+\bal
+&\lambda_1 = -2 \\
+&\lambda_2 = 8
+\eal
+$$
+
+Следуя алгоритму поиска базиса подпространств $V_\lambda$, найдём ФСР:
+$$
+A-\lambda_1 E = \bpm
+4 & 8 \\
+3 & 6 
+\epm
+\ao{\text{Элем. преобр.}}
+\bpm
+1 & 2 \\
+0 & 0
+\epm
+\llaq 
+v_1 = 
+\bpm
+-2 \\ 1
+\epm
+$$
+
+$$
+A-\lambda_2 E = \bpm
+-6 & 8 \\
+3 & -4 
+\epm
+\ao{\text{Элем. преобр.}}
+\bpm
+1 & -\frac{4}{3} \\
+0 & 0
+\epm
+\llaq 
+v_2 = 
+\bpm
+\frac{4}{3} \\ 1
+\epm
+$$
+Значит, имеет два собственных значения матрицы, у каждого из которых есть подпространство, имеющее один базисный вектор.\par
+\vspace{5pt}
+б) Составим характеристический многочлен $\chi_A(\lambda)$:
+$$\chi_A(\lambda)=
+\det(\lambda E - A)=
+\bvm
+{\lambda - 4}&{5}&{-2}\\
+{-5}&{\lambda +7}&{-3}\\
+{-6}&{9}&{\lambda - 4}\\
+\evm =$$
+$$
+=(\lambda-4)^2(\lambda+7)+90+90-12(\lambda+7)+25(\lambda-4)+27(\lambda-4)=
+$$
+$$=\lambda^3-\lambda^2=\lambda^2(\lambda-1) 
+\llaq
+\bal
+&\lambda_1 = 0 \\
+&\lambda_2 = 1
+\eal
+$$
+Теперь найдём ФСР:
+$$
+A-\lambda_1 E = A 
+\ao{\text{Элем. преобр.}}
+\bpm
+{1}&{0}&{-\frac{1}{3}}\\
+{0}&{1}&{-\frac{2}{3}}\\
+{0}&{0}&{0}\\
+\epm
+\llaq 
+v_1 = 
+\bpm
+\frac{1}{3} \\ \frac{2}{3} \\ 1
+\epm
+$$
+$$
+A- \lambda_2 E = 
+\bpm
+{3}&{-5}&{2}\\
+{5}&{-8}&{3}\\
+{6}&{-9}&{3}\\
+\epm
+\ao{\text{Элем. преобр.}}
+\bpm
+{1}&{0}&{-1}\\
+{0}&{1}&{-1}\\
+{0}&{0}&{0}\\
+\epm
+\llaq 
+v_2 = 
+\bpm
+1 \\ 1 \\ 1
+\epm
+$$
+\aanswer \par
+\begin{multicols}{2}
+а) Собственные значения: \\ $\lambda_1 = -2$, $\lambda_2 = 8$, \\
+базисы подпространств: \\ 
+$V_{\lambda1}=\langle \{v_1\} \rangle$,
+$v_1 = \bpm -2 \\ 1 \epm$, \\
+$V_{\lambda2}=\langle \{v_2\} \rangle$,
+$v_2 = \bpm \frac{4}{3} \\ 1 \epm$, \\
+собственные векторы: \\
+$v_{\lambda1}=x\cdot v_{\lambda1}, \\
+v_{\lambda2}=x\cdot v_{\lambda2}, x \in \mathbb{R}$
+
+\columnbreak
+б) Собственные значения: \\ $\lambda_1 = 0$, $\lambda_2 = 1$, \\
+базисы подпространств: \\ 
+$V_{\lambda1}=\langle \{v_1\} \rangle$,
+$v_1 = \bpm \frac{1}{3} \\ \frac{2}{3} \\ 1 \epm$, \\
+$V_{\lambda2}=\langle \{v_2\} \rangle$,
+$v_2 = \bpm 1 \\ 1 \\ 1 \epm$, \\
+собственные векторы: \\
+$v_{\lambda1}=x\cdot v_{\lambda1}, \\
+v_{\lambda2}=x\cdot v_{\lambda2}, x \in \mathbb{R}$
+\end{multicols}
+
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\pagenumbering{gobble}
+\usepackage{multicol}
+\newcommand{\ssolve}{\par\vspace{5pt}\noindent{\bf Решение. }\par}
+\newcommand{\aanswer}{\par\vspace{5pt}\noindent{\bf Ответ. }}
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+\newcommand{\bvm}{\begin{vmatrix}}
+\newcommand{\evm}{\end{vmatrix}}
+\newcommand{\bal}{\left\{\begin{aligned}}
+\newcommand{\eal}{\end{aligned}\right.}
+\newcommand{\llaq}{\quad \longrightarrow \quad}
+\newcommand{\ao}[1]{\overset{#1}{\longmapsto}}
+
+\begin{document}
+
+\title{<<Теория вероятностей:\\ Математическое ожидание и дисперсия>>\\ \vspace{12pt} Домашнее задание №4}
+\author{Байдаков Илья}
+\date{\today}
+\maketitle
+
+\section*{Задание 1}
+График функции плотности случайной величины $X$ изображен на рисунке ниже. Найдите математическое ожидание случайной величины $X$.
+\par
+\includegraphics[width=0.9 \textwidth]{2022-03-12_011905.png}\par
+\ssolve
+Воспользуемся геометрической интерпретацией мат. ожидания как центра масс на графике функции плотности. Масса сосредоточена в двух одинаковых по массе областях при $x \in [-1;0]$ и $x \in [\frac{1}{2};1\frac{1}{2}]$ с центрами тяжести соответственно в т. $x_1=- \frac{1}{2}$ и $x_2 = 1$. Тогда общий центр тяжести находится в т. $x=\frac{1}{4}$.
+\aanswer $\mathbb{E}X = \frac{1}{4}$.
+
+\section*{Задание 2}
+График функции распределения случайной величины $Y$ изображен на рисунке выше.
+Найдите математическое ожидание случайной величины $Y$.
+\ssolve
+Воспользуемся геометрической интерпретацией мат. ожидания как площади под/над графиком функции распределения. В данном случае $S=1\cdot\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2} \cdot \frac{3}{2}+\frac{1}{6}\cdot\frac{1}{6}\cdot(3+\frac{3}{2})=1.$
+\aanswer $\mathbb{E}Y = 1$.
+
+\section*{Задание 3}
+Считается, что число запросов на сервере за некоторый промежуток времени хорошо
+моделирует распределение Пуассона с параметром $\lambda$ равным частоте запросов.
+А время между двумя последовательными запросами имеет показательное распределение (это одно из названий экспоненциального распределения) с тем же параметром.
+Пусть $X$ — число запросов за час, а частота запросов равняется $10$ в час (т.е. $\lambda = 10$). \par
+а) Чему в этих предположениях равняется среднее число запросов за час? \par
+б) Чему равняется среднее время между двумя последовательными запросами? Ответ
+укажите в минутах. \par
+в) Пусть $Y = e^X$ параметр, определяющий нагрузку на сервер в зависимости от количества запросов $X$. Найдите $\mathbb{E}Y$.
+\ssolve
+а) Среднее число запросов в час равняется $\lambda$ согласно физическому смыслу распределения Пуассона. \par
+б) Среднее время между двумя запросами равняется 
+$$t = \frac{1}{\lambda} = \frac{1}{10} \text{ ч} = 6 \text{ мин.} $$ \par
+в) $$\mathbb{E}Y = \mathbb{E}(g(X))= \sum_{k=0}^{\infty} g(a_k) P(X=a_k)=$$
+$$ = \sum_{k=0}^{\infty} e^k e^{-\lambda}\frac{\lambda^k}{k!}=e^{-\lambda}\sum_{k=0}^{\infty}\frac{(e\lambda)^k}{k!}=e^{-\lambda}\cdot e^{e\lambda}=e^{\lambda(e-1)} \simeq 29 000 345.$$
+\aanswer \textbf{а)} Равняется $\lambda$. \textbf{б)} $6$ мин. \textbf{в)} $\simeq 29$ млн.
+
+\section*{Задание 4}
+Случайные величины $X \sim N(\mu_1, \sigma_1^2)$ и $Y \sim N(\mu_2, \sigma_2^2)$ независимы и имеют нормальное распределение с параметрами $\mu_1 = 1$, $\sigma_1^2 = 4$ и $\mu_2= 0$, $\sigma_2^2 = 1$. \par
+а) Найдите дисперсию случайной величины $(X-2)/2$. \par
+б) Найдите дисперсию случайной величины $2X-3Y$ . \par
+в) Найдите математическое ожидание случайной величины $(X - Y )^2$.\par
+
+\ssolve \par
+а) Используя свойства дисперсии $\textbf{Var}(X \sim N) = \sigma^2$ и \\ $\textbf{Var} (cX) = c^2 \textbf{Var}(X)$:
+$$ \textbf{Var}[(X-2)/2]=\textbf{Var}(\frac{1}{2}X)+\textbf{Var}(-1)=\frac{1}{4}\textbf{Var}(X)+0=\frac{1}{4}\cdot \sigma_1^2 = 1.$$ \par
+б) Используя условие независимости сл. величин:,
+$$\textbf{Var}(2X-3Y)=\textbf{Var}(2X)+\textbf{Var}(-3Y)=$$
+$$=4\textbf{Var}(X)+(-3)^2\textbf{Var}(Y)=4\cdot 4 + 9 \cdot 1 = 25.$$ 
+\par
+в) Распишем квадрат разности, воспользуемся свойством линейности мат. ожидания и формулой для связи дисперсии и мат. ожидания:
+$$\mathbb{E}(X^2)=\textbf{Var}(X)+(\mathbb{E}X)^2=\sigma_1^2+\mu_1^2=5, \qquad \mathbb{E}(Y^2)=1.$$
+Получим:
+$$\mathbb{E}(X - Y )^2=\mathbb{E}(X^2)-2\mathbb{E}X\cdot\mathbb{E}Y+\mathbb{E}(Y^2)=5-2\cdot1\cdot0+1=6.$$
+\aanswer а) $\textbf{Var} = 1$, б) $\textbf{Var} = 25$ в) $\mathbb{E} = 6$.
+
+\section*{Задание 5}
+Докажите, что \\ $\underset{a \in \mathbb{R}}{\min}$ $\mathbb{E}(X-a)^2$ равен $\textbf{Var}(X)$ и достигается только при $a = \mathbb{E}X$.
+\par \vspace{5pt}
+\textbf{Доказательство.} \par
+Раскроем скобки:
+$$\mathbb{E}(X-a)^2 = \mathbb{E}(X^2-2a\mathbb{E}X+a^2)=\mathbb{E}(X^2)-2a\mathbb{E}X+a^2.$$
+Результат будет зависеть от значений последних двух членов, т.к. только они зависят от $a$. Исследуем их на экстремумы относительно $a$:
+$$(-2a\mathbb{E}X+a^2)'=2a-2\mathbb{E}X \qquad \qquad (*)$$
+Приравнивая (*) к нулю, получаем $a = \mathbb{E}X$. Тогда:
+$${\min} \text{ } \mathbb{E}(X-a)^2 = \mathbb{E}(X-\mathbb{E}X)^2=\textbf{Var}(X) \text{, ч.т.д.}$$ 
+
+\section*{Задание 6}
+В мешке имеется $10$ шаров, из которых $6$ белых и $4$ чёрных, и мы дважды вытаскиваем из него шар, не возвращая обратно. \par
+Найдите \textbf{а)} распределение, \textbf{б)} математическое ожидание и \textbf{в)} дисперсию количества чёрных шаров среди вынутых. \par
+\textbf{г)} Изменится ли ответ, если вынимать шары следующим образом: вытащили первый
+шар и положили обратно, а затем вытащили второй шар?
+
+\ssolve
+а) Пусть $X$ - случайная величина, равная количеству чёрных шаров среди вытащенных. Она может принимать значения $0, 1$ и $2$.
+$$P(X = 0) = \frac{6}{10} \cdot \frac{5}{9}=\frac{15}{45}$$
+$$P(X = 1) = \frac{6}{10} \cdot \frac{4}{9}+\frac{4}{10} \cdot \frac{6}{9}=\frac{24}{45}$$
+$$P(X = 2) = \frac{4}{10} \cdot \frac{3}{9}=\frac{6}{45}$$
+б) Математическое ожидание найдём по определению:
+$$\mathbb{E}X=0\cdot\frac{15}{45}+1\cdot \frac{24}{45} + 2 \cdot \frac{6}{45} = 0.8$$
+в) Дисперсия:
+$$\textbf{Var} (X) = \mathbb{E}(X^2)-(\mathbb{E}X)^2=0.426(6),\text{где}$$
+$$\mathbb{E}(X^2)=0\cdot\frac{15}{45}+1\cdot \frac{24}{45} + 2^2 \cdot \frac{6}{45} = \frac{48}{45}$$
+г) Изменится, т.к. распределение вероятностей будет другое. Например,
+$$P(X=0) = \frac{6}{10}\cdot\frac{6}{10}=0.36$$
+\aanswer \vspace{5pt} \par а) 
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X$&0&1&2 \\
+\hline
+$P$&$15/45$&$24/45$&$6/45$\\
+\hline
+\end{tabular}
+\par
+б) $\mathbb{E}X = 0.8$, \par в) $\textbf{Var}(X)=0.426(6)$, \par г) Изменится.
+
+
+
+\end{document}

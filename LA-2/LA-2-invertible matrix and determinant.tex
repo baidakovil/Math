@@ -1,0 +1,482 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\pagenumbering{gobble}
+\usepackage{wrapfig}
+\usepackage{color}
+
+
+\begin{document}
+
+\title{<<Линейная алгебра:\\ Обратная матрица. Определитель>>\\ \vspace{12pt} Домашнее задание}
+\author{Байдаков Илья}
+\date{\today}
+\maketitle
+
+\section*{Задание 1}
+Найдите матрицу $A^{-1}$, где
+
+$$
+A=\begin{pmatrix}
+1&1&0\\
+0&1&0\\
+0&3&3
+\end{pmatrix}
+$$
+\noindent{\bf Решение.} Воспользуемся методом Жордана—Гаусса:
+$$ 
+\left(
+\begin{array}{ccc|ccc}
+1&1&0&1&0&0\\
+0&1&0&0&1&0\\
+0&3&3&0&0&1
+\end{array}
+\right)
+\overset{I - II}{\overset{III - II \cdot 3}{\longmapsto}}
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&1&-1&0\\
+0&1&0&0&1&0\\
+0&0&3&0&-3&1
+\end{array}
+\right)
+\longmapsto
+$$
+$$ 
+\overset{III \cdot \frac{1}{3}}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&1&-1&0\\
+0&1&0&0&1&0\\
+0&0&1&0&-1&\frac{1}{3}
+\end{array}
+\right)
+$$
+\noindent{\bf Ответ.}
+$A^{-1}= 
+\begin{pmatrix}
+1&-1&0\\
+0&1&0\\
+0&-1&\frac{1}{3}
+\end{pmatrix}
+$
+\newpage
+\section*{Задание 2}
+Найдите матрицу $X$, удовлетворяющую равенству
+
+$$
+\begin{pmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{pmatrix}
+\cdot
+X
+\cdot
+\begin{pmatrix}
+1&1&1\\
+1&2&3\\
+1&4&9
+\end{pmatrix}
+=
+\begin{pmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{pmatrix}
+$$
+
+\vspace{5pt}
+
+\noindent{\bf Решение.} Известно: если $P$ и $Q$ --- квадратные обратимые матрицы, то 
+$$PXQ=S \qquad \Leftrightarrow \qquad X=P^{-1}SQ^{-1}.$$ 
+Введём обозначения:
+$$
+P=\begin{pmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{pmatrix},
+Q=
+\begin{pmatrix}
+1&1&1\\
+1&2&3\\
+1&4&9
+\end{pmatrix},
+S=
+\begin{pmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{pmatrix}
+$$
+Найдём $P^{-1}$: \par
+$$ 
+\left(
+\begin{array}{ccc|ccc}
+0&0&1&1&0&0\\
+0&1&0&0&1&0\\
+1&0&0&0&0&1
+\end{array}
+\right)
+\overset{I \Leftrightarrow III}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&0&0&1\\
+0&1&0&0&1&0\\
+0&0&1&1&0&0
+\end{array}
+\right)
+\longmapsto
+P^{-1}=
+\left(
+\begin{array}{ccc}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{array}
+\right).
+$$
+Найдём $Q^{-1}$: \par
+$$\left(
+\begin{array}{ccc|ccc}
+1&1&1&1&0&0\\
+1&2&3&0&1&0\\
+1&4&9&0&0&1
+\end{array}
+\right)
+\overset{II - I}{\overset{III - I}{\longmapsto}}
+\left(
+\begin{array}{ccc|ccc}
+1&1&1&1&0&0\\
+0&1&2&-1&1&0\\
+0&3&8&-1&0&1
+\end{array}
+\right)
+\longmapsto
+$$
+$$ 
+\overset{III - 3\cdot II}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&1&1&1&0&0\\
+0&1&2&-1&1&0\\
+0&0&2&2&-3&1
+\end{array}
+\right)
+\overset{III\cdot \frac{1}{2}}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&1&1&1&0&0\\
+0&1&2&-1&1&0\\
+0&0&1&1& -\frac{3}{2}&\frac{1}{2}
+\end{array}
+\right)
+\longmapsto
+$$
+
+$$ 
+\overset{II - 2\cdot III}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&1&1&1&0&0\\
+0&1&0&-3&4&-1\\
+0&0&1&1& -\frac{3}{2}&\frac{1}{2}
+\end{array}
+\right)
+\overset{I - II - III}{\longmapsto}
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&3&-\frac{5}{2}&\frac{1}{2}\\
+0&1&0&-3&4&-1\\
+0&0&1&1& -\frac{3}{2}&\frac{1}{2}
+\end{array}
+\right)
+\longmapsto
+$$
+$$
+\longmapsto
+Q^{-1}=
+\left(
+\begin{array}{ccc}
+3&-\frac{5}{2}&\frac{1}{2}\\
+-3&4&-1\\
+1& -\frac{3}{2}&\frac{1}{2}
+\end{array}
+\right).
+$$
+Посчитаем $X$:
+$$X=P^{-1}SQ^{-1}=
+\begin{pmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+3&-\frac{5}{2}&\frac{1}{2}\\
+-3&4&-1\\
+1& -\frac{3}{2}&\frac{1}{2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+0&3&0\\
+0&2&0\\
+0&1&0
+\end{pmatrix}.
+$$
+\noindent{\bf Ответ.}
+$
+X=\begin{pmatrix}
+0&3&0\\
+0&2&0\\
+0&1&0
+\end{pmatrix}.
+$
+\section*{Задание 3}
+Найдите определитель матрицы $A$
+$$
+\begin{pmatrix}
+1&2&3\\
+5&1&4\\
+3&2&5
+\end{pmatrix}
+$$
+\noindent{\bf Решение.} Приведём матрицу к треугольному виду:
+$$
+\begin{pmatrix}
+1&2&3\\
+5&1&4\\
+3&2&5
+\end{pmatrix}
+\overset{III- I \cdot 3}{\overset{II- I \cdot 5}{\longmapsto}}
+\begin{pmatrix}
+1&2&3\\
+0&-9&-11\\
+0&-4&-4
+\end{pmatrix}
+\overset{III- II \cdot \frac{4}{9}}{\longmapsto}
+\begin{pmatrix}
+1&2&3\\
+0&-9&-11\\
+0&0&\frac{8}{9}
+\end{pmatrix}
+$$
+Тогда определитель будет равен произведению элементов на главной диагонали:
+$$det(A)=1 \cdot -9 \cdot  \frac{8}{9} = -8$$
+\noindent{\bf Ответ.} Определитель равен $-8$.
+\section*{Задание 4}
+Используя общее определение для определителя $n \times n$, вычислите следующий определитель:
+\[ 
+\begin{vmatrix}
+x & y & 0 & 0\\
+0 & x & y & 0\\
+0 & 0 & x & y\\
+y & 0 & 0 & x
+\end{vmatrix}
+\]
+\noindent{\bf Решение.} Посчитаем отдельно все слагаемые $S$ определителя, множители которых не содержат нулевых элементов:
+\begin{itemize}
+\item 
+$$
+\begin{vmatrix}
+\textcolor{red}{x} & y & 0 & 0\\
+0 & \textcolor{red}{x} & y & 0\\
+0 & 0 & \textcolor{red}{x} & y\\
+y & 0 & 0 & \textcolor{red}{x}
+\end{vmatrix}, \qquad
+sgn (\sigma) = -1^0 = 1, \qquad
+S = x^4$$
+
+\item 
+$$
+\begin{vmatrix}
+x & \textcolor{red}{y} & 0 & 0\\
+0 & x & \textcolor{red}{y} & 0\\
+0 & 0 & x & \textcolor{red}{y}\\
+\textcolor{red}{y} & 0 & 0 & x
+\end{vmatrix}, \qquad
+sgn (\sigma) = -1^3 = -1, \qquad
+S = -y^4$$
+\end{itemize}
+Других вариантов нет, значит, 
+\[ 
+\begin{vmatrix}
+x & y & 0 & 0\\
+0 & x & y & 0\\
+0 & 0 & x & y\\
+y & 0 & 0 & x
+\end{vmatrix} = x^4-y^4.
+\]
+\noindent{\bf Ответ.} Определитель равен $x^4-y^4$.
+\section*{Задание 5}
+С помощью приведения матрицы к треугольному виду вычислите определитель размера $n \times n$, где $n \geqslant 2$:
+\[
+\begin{vmatrix}
+4 & 3 & \dots & 3 & 3\\
+3 & 4 & \dots & 3 & 3\\
+\hdotsfor{5}\\
+3 & 3 & \dots & 4 & 3\\
+3 & 3 & \dots & 3 & 4
+\end{vmatrix}
+\]
+Дайте ответ в зависимости от $n$. \par
+\noindent{\bf Решение.}
+Определитель матрицы треугольного вида равен произведению элементов на главной диагонали матрицы. Проследим, что происходит с этими элементами при преобразовании к нижней треугольной матрице, начиная с нижней строки .\par
+Для $n=2$:
+$$
+\begin{pmatrix}
+4 & 3\\
+3 & 4\\
+\end{pmatrix}
+\overset{I-II}{\longmapsto}
+\begin{pmatrix}
+1 & -1\\
+3 & 4\\
+\end{pmatrix}
+\overset{I+II \cdot \frac{1}{4}}{\longmapsto}
+\begin{pmatrix}
+\frac{7}{4} & 0\\
+3 & 4\\
+\end{pmatrix}
+$$
+\par
+Для $n=3$:
+$$
+\begin{pmatrix}
+4 & 3 & 3\\
+3 & 4 & 3\\
+3 & 3 & 4\\
+\end{pmatrix}
+\overset{I-II}{\overset{(II-III) + III \cdot \frac{1}{4}}{\longmapsto}}
+\begin{pmatrix}
+1 & -1 & 0\\
+\frac{3}{4} & \frac{7}{4} & 0 \\
+3 & 3 & 4\\
+\end{pmatrix}
+\overset{I+II \cdot \frac{4}{7}}{\longmapsto}
+\begin{pmatrix}
+\frac{10}{7} & 0 & 0\\
+\frac{3}{4} & \frac{7}{4} & 0 \\
+3 & 3 & 4\\
+\end{pmatrix}
+$$
+\par
+Для $n=4$:
+$$
+\begin{pmatrix}
+4 & 3 & 3 & 3\\
+3 & 4 & 3 & 3\\
+3 & 3 & 4 & 3\\
+3 & 3 & 4 & 4\\
+\end{pmatrix}
+\overset{I-II}{\overset{II-III}{\overset{(III-IV) + IV \cdot \frac{1}{4}}{\longmapsto}}}
+\begin{pmatrix}
+1 & -1 & 0 & 0\\
+0 & 1 & -1 & 0\\
+\frac{3}{4} & \frac{3}{4} & \frac{7}{4} & 0\\
+3 & 3 & 4 & 4\\
+\end{pmatrix}
+\longmapsto
+$$
+$$
+\overset{II+III \cdot \frac{4}{7}}{\longmapsto}
+\begin{pmatrix}
+1 & -1 & 0 & 0\\
+\frac{3}{7} & \frac{10}{7} & 0 & 0\\
+\frac{3}{4} & \frac{3}{4} & \frac{7}{4} & 0\\
+3 & 3 & 4 & 4\\
+\end{pmatrix}
+\overset{I+II \cdot \frac{7}{10}}{\longmapsto}
+\begin{pmatrix}
+\frac{13}{10} & 0 & 0 & 0\\
+\frac{3}{7} & \frac{10}{7} & 0 & 0\\
+\frac{3}{4} & \frac{3}{4} & \frac{7}{4} & 0\\
+3 & 3 & 4 & 4\\
+\end{pmatrix}
+$$
+Сделаем наблюдения:
+\begin{itemize}
+\item Преобразования строк одинаковы для $n$-й, $(n-1)$-й и т.д. строки для любой матрицы $n \times n$
+\item Значения элементов на главной диагонали и слева от неё одинаковы для $n$-й, $(n-1)$-й и т.д. строки для любой матрицы $n \times n$
+\item Элемент $a_{1,1}$ всегда есть сумма $1$ и произведения $a_{2,1} \times \frac{1}{a_{2,2}}$
+\end{itemize}
+Учитывая это, утверждаем, что каждый элемент на главной диагонали может быть выражен только через $n$ и значения элементов на $n$-й строке матрицы. Все эти элементы составляют последовательность чисел $S_n$ для $n \geq 2$:
+$$S_n=\frac{7}{4},\frac{10}{7},\frac{13}{10},\frac{16}{13}, \ldots$$
+каждый член которой можно выразить через $n$:
+$$S_n=\frac{3n + 1}{3n - 2}.$$
+Тогда определитель матрицы $n \times n$ записывается в виде:
+$$det=4 \cdot \prod_2^{n}\frac{3n + 1}{3n - 2}.$$
+\noindent{\bf Ответ.} Определитель равен $4 \cdot \prod_2^{n}\frac{3n + 1}{3n - 2}$.
+
+\section*{Задание 6}
+Используя формулы Крамера, решите следующую систему линейных уравнений:
+\[
+\left\{
+\begin{aligned}
+-&x_1 + \frac{x_2}{2} + 3 x_3 = 2\\
+-&2x_1 + 3x_2 + 11x_3 = 2\\
+&4x_1 -2x_2 -11x_3 = 2\\
+\end{aligned}
+\right.
+\]
+\noindent{\bf Решение.} \par
+Имеем
+$$A=
+\begin{pmatrix}
+-1 & {1}/2 & 3\\
+-2 & 3 & 11\\
+4 & -2 & -11
+\end{pmatrix},
+B_1=
+\begin{pmatrix}
+2 & {1}/2 & 3\\
+2 & 3 & 11\\
+2 & -2 & -11
+\end{pmatrix},
+$$
+$$
+B_2=
+\begin{pmatrix}
+-1 & 2 & 3\\
+-2 & 2 & 11\\
+4 & 2 & -11
+\end{pmatrix},
+B_3=
+\begin{pmatrix}
+-1 & {1}/2 & 2\\
+-2 & 3 & 2\\
+4 & -2 & 2
+\end{pmatrix}
+$$
+\par
+Отсюда $\det A = -2, \det B_1=-30, \det B_2=52, \det B_3=-20$.\par
+Далее $x_1 = \frac{-30}{-2}=15,x_2=\frac{52}{-2}=-26,x3=\frac{-20}{-2}=10$. \par
+\noindent{\bf Ответ. }$x_1 =15,x_2=-26,x3=10$.
+
+\section*{Задание 7}
+
+Пусть $A\in M_n(\mathbb{R})$ такова, что $A^m = 0$ для некоторого натурального $m$. Покажите, что матрица $(E - A)$ обратима ({\it указание: найдите явный вид обратной матрицы}).\par
+\noindent{\bf Решение.} \par
+
+Заметим, что при умножении матрицы $(E - A)$ на матрицу вида\\$(E+A^1+A^2+\ldots+A^{m-1})$ матрица $A$, входящая в оба множителя,сокращается и произведением является $E$:
+$$(E-A)\cdot(E+A^1+A^2+\cdot+A^{m-1})=$$
+$$
+=E^2+EA^1+EA^2+...+EA^{m-1}-AE-A^2-A^3-...-A^{m-1}-A^m=
+$$
+$$=E-A^m=E$$\par
+По определению, матрица $A\in M_n(\mathbb{R})$ обратима, если существует\\$R\in M_n(\mathbb{R})$ такая, что $AR=E$, что и было показано.\par
+Итак, явный вид матрицы обратной матрицы:
+$$(E-A)^{-1}=E+\sum_{k=1}^{m-1}A^k.$$
+\end{document}
+

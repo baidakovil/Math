@@ -1,0 +1,464 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\pagenumbering{gobble}
+\usepackage{wrapfig}
+
+
+\begin{document}
+
+\title{<<Линейная алгебра:\\ метод Гаусса и матрицы>>\\ \vspace{12pt} Домашнее задание}
+\author{Байдаков Илья}
+\date{\today}
+\maketitle
+
+
+\section*{Задание 1}
+Решите систему линейных уравнений:
+$$
+\left\{
+\begin{aligned}
+&6x + 12y + 5z + t = -6\\
+&9x + 18y + 17z -8t = -9\\
+&5x + 10y + 4z + t = -5
+\end{aligned}
+\right.
+$$
+
+\noindent{\bf Решение.} Запишем расширенную матрицу системы:
+
+$$ \left(\begin{array}{cccc|c}
+6 & 12 & 5 & 1 & -6 \\
+9 & 18 & 17 & -8 & -9 \\
+5 & 10 & 4 & 1 & -5
+\end{array} \right)
+\overset{I-III}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 2 & 1 & 0 & -1 \\
+9 & 18 & 17 & -8 & -9 \\
+5 & 10 & 4 & 1 & -5
+\end{array} \right)
+\longmapsto \\ $$
+
+$$ \overset{III-5I}{\overset{II-9\cdot I}{\longmapsto}}
+\left(\begin{array}{cccc|c}
+1 & 2 & 1 & 0 & -1 \\
+0 & 0 & 8 & -8 & 0 \\
+0 & 0 & -1 & 1 & 0
+\end{array} \right)
+\overset{II+8\cdot III}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 2 & 1 & 0 & -1 \\
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & 1 & 0
+\end{array} \right).\\ $$
+Имеем $x$ и $z$ главными неизвестными, а $y$ и $t$ --- свободными. Полученная матрица соответствует системе уравнений:
+$$
+\left\{
+\begin{aligned}
+&x + 2y + z = -1\\
+&z = t
+\end{aligned}
+\right.
+\qquad \Leftrightarrow \qquad
+\left\{
+\begin{aligned}
+&x = -2y - t -1\\
+&z = t
+\end{aligned}
+\right. .
+$$
+\vspace{1ex}
+\noindent {\bf Ответ.} $x = -2y - t -1$, $z = t$, где $y, t \in \mathbb{R}$.
+
+\section*{Задание 2}
+Система линейных уравнений называется {\it совместной}, если она имеет хотя бы одно решение (в вещественных числах).
+Определите, при каких значениях параметра $\lambda \in \mathbb{R}$ следующая система является совместной, а при каких --- нет
+({\it явное решение системы предъявлять не обязательно}):
+$$\left\{
+\begin{aligned}
+&8x_1 + 6 x_2 + 3 x_3 +2x_4 = 5\\
+-&12x_1 - 3x_2 -3x_3 + 3x_4 = -6\\
+&4x_1 +5x_2 +2x_3 + 3x_4 = 3\\
+& \lambda x_1 + 4x_2 + x_3 + 4x_4= 2
+\end{aligned}
+\right.$$
+\noindent{\bf Решение.} Запишем расширенную матрицу системы:
+$$ \left(\begin{array}{cccc|c}
+8 & 6 & 3 & 2 & 5 \\
+-12 & -3 & -3 & 3 & -6 \\
+4 & 5 & 2 & 3 & 3 \\
+\lambda & 4 & 1 & 4 & 2 \\
+\end{array} \right) 
+\overset{I-2\cdot III}{\longmapsto}
+\left(\begin{array}{cccc|c}
+0 & -4 & -1 & -4 & -1 \\
+-12 & -3 & -3 & 3 & -6 \\
+4 & 5 & 2 & 3 & 3 \\
+\lambda & 4 & 1 & 4 & 2 \\
+\end{array} \right) 
+\longmapsto $$
+
+$$ 
+\overset{I+IV}{\longmapsto}
+\left(\begin{array}{cccc|c}
+\lambda & 0 & 0 & 0 & 1 \\
+0 & 12 & 3 & 12 & 15 \\
+4 & 5 & 2 & 3 & 3 \\
+\lambda & 4 & 1 & 4 & 2 \\
+\end{array} \right).$$
+Таким образом, из полученной матрицы следует, что 
+$$\lambda = 1.$$
+Дальнейшими преобразованиями с учётом $\lambda = 1$ система может быть приведена к ступенчатому виду. Значит $\lambda = 1$ является условием совместности системы. \par
+\vspace{1ex}
+\noindent{\bf Ответ.} Система совместна при $\lambda = 1$ и несовместна при $\lambda \neq 1$.
+
+\section*{Задание 3}
+Найдите многочлен $f(x)$ третьей степени, для которого 
+\[
+f(1) = 1, \ f(-1) = 13, \ f(2) = 7, \ f(-3) = 17.
+\]
+\noindent {\bf Решение.} 
+Общий вид искомого многочлена $f(x)$:
+$$ax^3 + bx^2 + cx + d = m.$$
+Подставляя $x$ в этот многочлен, составим систему из четырёх линейных уравнений, в которых $a$, $b$, $c$, $d$ --- неизвестные. Запишем и преобразуем расширенную матрицу такой системы: 
+$$
+\left(\begin{array}{cccc|c}
+1 & 1 & 1 & 1 & 1 \\
+-1 & 1 & -1 & 1 & 13 \\
+8 & 4 & 2 & 1 & 7 \\
+-27 & 9 & -3 & 1 & 17 \\
+\end{array} \right) 
+\overset{II+I}{\overset{III-8\cdot I}{\longmapsto}}
+\left(\begin{array}{cccc|c}
+1 & 1 & 1 & 1 & 1 \\
+0 & 2 & 0 & 2 & 14 \\
+0 & -4 & -6 & -7 & -1 \\
+-27 & 9 & -3 & 1 & 17 \\
+\end{array} \right) 
+\longmapsto $$
+
+$$ \overset{I-II\cdot \frac{1}{2}}{\overset{III+2\cdot II}{\longmapsto}}
+\left(\begin{array}{cccc|c}
+1 & 1 & 1 & 1 & 1 \\
+-1 & 1 & -1 & 1 & 13 \\
+0 & 0 & -6 & -3 & 27 \\
+-27 & 9 & -3 & 1 & 17 \\
+\end{array} \right)
+\overset{VI+27 \cdot I}{\overset{III \cdot \frac{1}{3}}{\longmapsto}}
+\left(\begin{array}{cccc|c}
+1 & 0 & 1 & 0 & -6 \\
+0 & 2 & 0 & 2 & 14 \\
+0 & 0 & -2 & -1 & 9 \\
+0 & 9 & 24 & 1 & -145 \\
+\end{array} \right) 
+\longmapsto 
+$$
+
+
+$$ \overset{IV-\frac{II \cdot \frac{9}{2}}{8}}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 1 & 1 & 1 & 1 \\
+0 & 2 & 0 & 2 & 14 \\
+0 & 0 & -2 & -1 & 9 \\
+0 & 0 & 24 & -8 & -208 \\
+\end{array} \right)
+\overset{\frac{VI+12 \cdot III}{-20}}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 0 & 1 & 0 & -6 \\
+0 & 2 & 0 & 2 & 14 \\
+0 & 0 & -2 & -1 & 9 \\
+0 & 0 & 0 & 1 & 5 \\
+\end{array} \right) 
+\longmapsto 
+$$
+
+$$ \overset{II \cdot \frac{1}{2}}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 0 & 1 & 0 & -6 \\
+0 & 1 & 0 & 1 & 7 \\
+0 & 0 & -2 & -1 & 9 \\
+0 & 0 & 0 & 1 & 5 \\
+\end{array} \right)
+\overset{\frac{III+IV}{-\frac{1}{2}}}{\overset{II-IV}{\longmapsto}}
+\left(\begin{array}{cccc|c}
+1 & 0 & 1 & 0 & -6 \\
+0 & 1 & 0 & 0 & 2 \\
+0 & 0 & 1 & 0 & -7 \\
+0 & 0 & 0 & 1 & 5 \\
+\end{array} \right)
+\longmapsto
+$$
+$$ \overset{I -III}{\longmapsto}
+\left(\begin{array}{cccc|c}
+1 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 & 2 \\
+0 & 0 & 1 & 0 & -7 \\
+0 & 0 & 0 & 1 & 5 \\
+\end{array} \right) .
+$$
+Из преобразованной матрицы следует решение системы уравнений:
+$$
+\left\{
+\begin{aligned}
+&a = 1\\
+&b = 2\\
+&c = -7 \\
+&d = 5 .\\
+\end{aligned}
+\right.
+$$
+
+Значит, искомый многочлен имеет вид
+$$f(x) = x^3 + 2x^2 -7x + 5.$$
+\vspace{1ex}
+\noindent{\bf Ответ.} $f(x) = x^3 + 2x^2 -7x + 5$.
+\newpage
+\section*{Задание 4}
+Вычислите:
+\[
+(A^TB^T + B^TA)^T - ((2BA)^T - E^3)^2 - A^T B - BA,
+\]
+где 
+\[
+A = \begin{pmatrix}
+1 & 2\\
+-3 & 0\\
+\end{pmatrix},\
+B = \begin{pmatrix}
+0 & -1\\
+2 & 1\\
+\end{pmatrix}.
+\]
+\noindent {\bf Решение.}\\ Преобразуем выражение:
+\begin{align*}
+&(A^TB^T + B^TA)^T - ((2BA)^T - E^3)^2 - A^T B - BA \Leftrightarrow \\
+&((BA)^T+B^TA)^T-((2BA)^T-E^3)^2-A^TB-BA \Leftrightarrow \\
+&((BA)^T)^T+(B^TA)^T-((2BA)^T-E^3)^2-A^TB-BA \Leftrightarrow \\
+&BA+A^T(B^T)^T-((2BA)^T-E^3)^2-A^TB-BA \Leftrightarrow \\
+&BA+A^TB-((2BA)^T-E^3)^2-A^TB-BA \Leftrightarrow \\
+&-(2(BA)^T-E^3)^2
+\end{align*}
+Теперь вычислим:
+$$ BA = 
+\begin{pmatrix}
+0 & -1\\
+2 & 1\\
+\end{pmatrix}
+\begin{pmatrix}
+1 & 2\\
+-3 & 0\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+3 & 0\\
+-1 & 4\\
+\end{pmatrix}. $$
+Далее,
+$$ (BA)^T=
+\begin{pmatrix}
+3 & -1\\
+0 & 4\\
+\end{pmatrix}, \\
+ 2(BA)^T =
+\begin{pmatrix}
+6 & -2\\
+0 & 8\\
+\end{pmatrix}$$
+С лекции известно, что:
+$$E^3 = 
+\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+\end{pmatrix}.$$
+$$(2BA)^T-E^3 =
+\begin{pmatrix}
+5 & -2\\
+0 & 7 \\
+\end{pmatrix}, $$
+$$((2BA)^T-E^3)^2 = 
+\begin{pmatrix}
+5 & -2\\
+0 & 7 \\
+\end{pmatrix}
+\begin{pmatrix}
+5 & -2\\
+0 & 7 \\
+\end{pmatrix} =
+\begin{pmatrix}
+25 & -24\\
+0 & 49 \\
+\end{pmatrix}.$$
+Окончательно:
+$$-((2BA)^T-E^3)^2=
+\begin{pmatrix}
+-25 & 24\\
+0 & -49 \\
+\end{pmatrix}.$$
+\noindent{\bf Ответ.} $\begin{pmatrix}
+-25 & 24\\
+0 & -49 \\
+\end{pmatrix}.$
+\newpage
+\section*{Задание 5}
+Найдите все матрицы, коммутирующие с матрицей
+$\begin{pmatrix}
+-1 & 3\\
+2 & 5
+\end{pmatrix}.$
+\par
+\noindent {\bf Решение.}\\ Запишем элементы искомой матрицы в виде переменных. Она должна быть той же размерности, что и данная. Тогда верно, что матрица:
+$$\begin{pmatrix}
+-1 & 3\\
+2 & 5 \\
+\end{pmatrix}
+\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+ =
+\begin{pmatrix}
+-a + 3c & -b+3d \\
+2a + 5c & 2b+5d \\
+\end{pmatrix}
+$$
+совпадает с матрицей
+$$ \begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+\begin{pmatrix}
+-1 & 3\\
+2 & 5 \\
+\end{pmatrix}
+ =
+\begin{pmatrix}
+-a + 2b & 3a+5b \\
+-c + 2d & 3c+5d \\
+\end{pmatrix},
+$$
+т.е.
+$$
+\begin{pmatrix}
+-a + 3c & -b+3d \\
+2a + 5c & 2b+5d \\
+\end{pmatrix} = 
+\begin{pmatrix}
+-a + 2b & 3a+5b \\
+-c + 2d & 3c+5d
+\end{pmatrix}.$$
+Приравняем соответствующие элементы матриц и получим систему уравнений: \par
+$$\left\{
+\begin{aligned}
+&-a+3c = -a +2b\\
+&-b+3d=6a+5b\\
+&2a+5c=-c+2d\\
+&2b+5d=3c+5d
+\end{aligned}
+\right.
+\qquad
+\Leftrightarrow
+\qquad 
+\left\{
+\begin{aligned}
+& 3c = 2b\\
+&3d=3a+6b\\
+\end{aligned}
+\right.
+$$
+Принимая, $a$ и $b$ главными неизвестными, а $c$ и $d$ --- свободными, получаем:
+$$\left\{
+\begin{aligned}
+&c = \frac{2}{3}b\\
+&d = a+2b\\
+\end{aligned}
+\right.
+$$
+Искомые матрицы:
+$$ \begin{pmatrix}
+a & b\\
+\frac{2}{3}b & a+2b \\
+\end{pmatrix},$$
+где $a$, $b \in \mathbb{R}.$ \par
+\noindent{\bf Ответ.}
+$ \begin{pmatrix}
+a & b\\
+\frac{2}{3}b & a+2b \\
+\end{pmatrix},$
+$a$, $b \in \mathbb{R}.$
+\newpage
+\section*{Задание 6}
+Для произвольных $n \times n$ матриц $A$ и $B$ предложите способ вычисления выражения
+$$3BA^4 + B^2A^3 - 3BA^3B - B^2A^2B,$$
+в котором используется лишь константное (не зависящее от $n$) количество указанных выше операций, и при этом {\bf не более~4-х} операций умножения матрицы на матрицу. Разрешается выделять дополнительную память --- хранить в памяти константное число $n \times n$ матриц (возможно, зависящих от $A, B$), которые могут быть использованы при промежуточных вычислениях.\par
+\noindent {\bf Решение.}\\
+Преобразуем выражение:
+\begin{align*}
+&3BA^4 + B^2A^3 - 3BA^3B - B^2A^2B \Leftrightarrow \\
+&3BA^3(A-B) + B^2A^2(A-B) \Leftrightarrow \\
+&3BA \cdot A^2(A-B) + B^2 \cdot A^2(A-B) \Leftrightarrow \\
+&(3BA+B^2)A^2(A-B) \Leftrightarrow \\
+&B(3A+B)A^2(A-B).
+\end{align*}
+Тогда вычисление предлагается провести так: 
+\begin{itemize}
+\item Выделить память для хранения $A$, $B$, $3A$, $(3A+B)$, $A^2$ и $(A-B)$
+\item Вычислить $3A$, $(3A+B)$ и $(A-B)$
+\item Вычислить $A^2$ (1-я операция умножения)
+\item Вычислить $B\cdot (3A+B)\cdot A^2 \cdot (A-B)$ (2-я, 3-я и 4-я операции умножения)
+\end{itemize} 
+\newpage
+\section*{Задание 7}
+Студент перемножил следующие матрицы, расположив их в некотором порядке (были использованы все матрицы):
+$$
+A = 
+\begin{pmatrix}
+5 & 1 & 2 & -1 & 0\\
+1 & 4 & -3 & 2 & 2
+\end{pmatrix}, \
+B =\begin{pmatrix}
+1 & 1 & 1\\
+-1 & 0 & 3\\
+-2 & 1 & 4\\
+0 & 0 & 3
+\end{pmatrix}
+$$
+$$
+C = \begin{pmatrix}
+1 & 2 & -1 & 0\\
+-3 & 0 & 1 & 2
+\end{pmatrix},\
+D = 
+\begin{pmatrix}
+4 & -1\\
+1 & 0
+\end{pmatrix}, \
+F = \begin{pmatrix}
+-4 & 1\\
+12 & -7\\
+1 & 1
+\end{pmatrix}.
+$$
+Вычислите матрицу, которую он получил (перечислите все возможные варианты).\par
+\noindent {\bf Решение.}\\
+Составим орграф, в котором вершины --- размер $m \times n$ матрицы, а рёбра соединяют те вершины, для которых определено умножение матриц.\par
+При этом заметим, что матрица с уникальным количеством столбцов или строк только одна, это $A$. Значит, в произведении нескольких матриц она должна быть последней, т.к. в противном случае ей не найдётся сомножителя. Поэтому рёбра начнём строить от $A$ в обратном порядке. Граф показан ниже. Рёбра подписаны размером матрицы, получившейся при перемножении на предыдущем шаге. \par
+\centerline{\includegraphics[scale=0.7]{img/graph.png}}
+Таким образом, есть две последовательности, в которые можно поставить матрицы для перемножения. Порядок перемножения не рассматривается, т.к. по условию для ответа требуется только вычисленная матрица. Возможные варианты последовательностей и вычисленных матриц:
+\begin{itemize}
+\item $D \cdot C \cdot B \cdot F \cdot A=
+\begin{pmatrix}
+-35 & -7 & -14 & 7 & 0\\
+-1 & 15 & -14 & 9 & 8
+\end{pmatrix}$
+\item $C \cdot B \cdot F \cdot D \cdot A=
+\begin{pmatrix}
+1 & 4 & -3 & 2 & 2\\
+137 & 16 & 65 & -34 & -6
+\end{pmatrix}$
+\end{itemize}
+\end{document}
